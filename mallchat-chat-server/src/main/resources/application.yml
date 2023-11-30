@@ -23,3 +23,10 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: true
+wx:
+  mp:
+    callback: ${mallchat.wx.callback}
+    configs:
+      - appId: ${mallchat.wx.appId} # ???????appid
+        secret: ${mallchat.wx.secret} # ????appsecret
+        token: ${mallchat.wx.token} # ??????Token?
