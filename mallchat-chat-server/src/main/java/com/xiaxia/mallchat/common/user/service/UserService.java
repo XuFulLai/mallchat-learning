@@ -56,7 +56,7 @@ public interface UserService {
      *
      * @param user
      */
-    void register(User user);
+    Long register(User user);
 
     void black(BlackReq req);
 

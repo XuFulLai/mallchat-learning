@@ -1,6 +1,7 @@
 package com.xiaxia.mallchat.common.user.service.handler;
 
-import com.xiaxia.mallchat.common.user.service.WxMsgService;
+import com.xiaxia.mallchat.common.user.service.WXMsgService;
+import com.xiaxia.mallchat.common.user.service.adapter.TextBuilder;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -17,7 +18,7 @@ import java.util.Map;
 @Component
 public class SubscribeHandler extends AbstractHandler {
     @Autowired
-    private WxMsgService wxMsgService;
+    private WXMsgService wxMsgService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
@@ -28,7 +29,7 @@ public class SubscribeHandler extends AbstractHandler {
 
         WxMpXmlOutMessage responseResult = null;
         try {
-            responseResult = this.handleSpecial(weixinService, wxMessage);
+            responseResult = wxMsgService.scan(wxMessage);
         } catch (Exception e) {
             this.logger.error(e.getMessage(), e);
         }
@@ -43,7 +44,7 @@ public class SubscribeHandler extends AbstractHandler {
             this.logger.error(e.getMessage(), e);
         }
 
-        return null;
+        return TextBuilder.build("感谢关注", wxMessage);
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.xiaxia.mallchat.common.user.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Description: ws的基本返回信息体
@@ -8,6 +10,8 @@ import lombok.Data;
  * Date: 2023-03-19
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WSBaseResp<T> {
     /**
      * ws推送给前端的消息
