@@ -95,7 +95,6 @@ public class WebSocketServiceImpl implements WebSocketService {
         String token = loginService.login(uid);
         //用户登录
         sendMsg(channel, WebSocketAdapter.buildResp(user, token));
-
     }
 
     @Override
