@@ -1,7 +1,9 @@
 package com.xiaxia.mallchat.common.user.service.adapter;
 
 import com.xiaxia.mallchat.common.user.domain.entity.User;
+import com.xiaxia.mallchat.common.user.domain.vo.response.user.UserInfoResp;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+import org.springframework.beans.BeanUtils;
 
 /**
  * @author xfl
@@ -19,5 +21,13 @@ public class UserAdapter {
         user.setAvatar(userInfo.getHeadImgUrl());
         user.setSex(userInfo.getSex());
         return user;
+    }
+
+    public static UserInfoResp buildUserInfo(User user, Integer modifyNameCount) {
+        UserInfoResp vo = new UserInfoResp();
+        BeanUtils.copyProperties(user, vo);
+        vo.setId(user.getId());
+        vo.setModifyNameChance(modifyNameCount);
+        return vo;
     }
 }

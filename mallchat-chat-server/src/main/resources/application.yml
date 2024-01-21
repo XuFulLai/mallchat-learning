@@ -9,6 +9,9 @@ spring:
     username: ${mallchat.mysql.username}
     password: ${mallchat.mysql.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   redis:
     # Redis?????
     host: ${mallchat.redis.host}
@@ -30,3 +33,6 @@ wx:
       - appId: ${mallchat.wx.appId} # ???????appid
         secret: ${mallchat.wx.secret} # ????appsecret
         token: ${mallchat.wx.token} # ??????Token?
+
+jwt:
+  secret: ${mallchat.jwt.secret}
