@@ -69,4 +69,6 @@ public interface UserService {
     List<SummeryInfoDTO> getSummeryUserInfo(SummeryInfoReq req);
 
     List<ItemInfoDTO> getItemInfo(ItemInfoReq req);
+
+    void wearingBadges(Long uid,Long badgeId);
 }

@@ -7,6 +7,7 @@ import com.xiaxia.mallchat.common.user.service.IUserBackpackService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,5 +40,11 @@ public class UserBackpackDao extends ServiceImpl<UserBackpackMapper, UserBackpac
                 .eq(UserBackpack::getStatus, YesOrNoEnum.NO.getStatus())
                 .set(UserBackpack::getStatus, YesOrNoEnum.YES.getStatus())
                 .update();
+    }
+
+    public List<UserBackpack> getByItemId(Long uid, List<Long> itemId) {
+        return lambdaQuery().eq(UserBackpack::getUid, uid)
+                .eq(UserBackpack::getStatus, YesOrNoEnum.NO.getStatus())
+                .in(UserBackpack::getId, itemId).list();
     }
 }

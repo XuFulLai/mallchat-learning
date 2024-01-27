@@ -5,6 +5,8 @@ import com.xiaxia.mallchat.common.common.domain.dto.RequestInfo;
 import com.xiaxia.mallchat.common.common.domain.vo.resp.ApiResult;
 import com.xiaxia.mallchat.common.common.util.RequestHolder;
 import com.xiaxia.mallchat.common.user.domain.vo.request.user.ModifyNameReq;
+import com.xiaxia.mallchat.common.user.domain.vo.request.user.WearingBadgeReq;
+import com.xiaxia.mallchat.common.user.domain.vo.response.user.BadgeResp;
 import com.xiaxia.mallchat.common.user.domain.vo.response.user.UserInfoResp;
 import com.xiaxia.mallchat.common.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -14,6 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +46,19 @@ public class UserController {
     @ApiOperation(value = "修改用户名")
     public ApiResult<Void> modifyName(@Validated @RequestBody ModifyNameReq req) {
         userService.modifyName(RequestHolder.get().getUid(), req);
+        return ApiResult.success();
+    }
+
+    @GetMapping("badges")
+    @ApiOperation(value = "可选徽章预览")
+    public ApiResult<List<BadgeResp>> badges() {
+        return ApiResult.success(userService.badges(RequestHolder.get().getUid()));
+    }
+
+    @PutMapping("badge")
+    @ApiOperation("佩戴徽章")
+    public ApiResult<Void> wearingBadges(@Valid @RequestBody WearingBadgeReq req) {
+        userService.wearingBadges(RequestHolder.get().getUid(), req.getBadgeId());
         return ApiResult.success();
     }
 }
