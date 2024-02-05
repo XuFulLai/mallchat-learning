@@ -3,6 +3,9 @@ package com.xiaxia.mallchat.common;
 import com.xiaxia.mallchat.common.common.thread.MyUncaughtExceptionHandler;
 import com.xiaxia.mallchat.common.common.util.JwtUtils;
 import com.xiaxia.mallchat.common.user.dao.UserDao;
+import com.xiaxia.mallchat.common.user.domain.enums.IdempotentEnum;
+import com.xiaxia.mallchat.common.user.domain.enums.ItemEnum;
+import com.xiaxia.mallchat.common.user.service.IUserBackpackService;
 import com.xiaxia.mallchat.common.user.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -39,6 +42,7 @@ public class DaoTest {
 
     @Autowired
     private JwtUtils jwtUtils;
+
     @Test
     public void jwt() {
         System.out.println(jwtUtils.createToken(1L));
@@ -60,6 +64,7 @@ public class DaoTest {
 
     @Autowired
     private RedissonClient redissonClient;
+
     @Test
     public void test3() {
         RLock lock = redissonClient.getLock("123");
@@ -87,9 +92,10 @@ public class DaoTest {
 
     @Autowired
     private ThreadPoolTaskExecutor threadPoolExecutor;
+
     @Test
     public void test5() throws InterruptedException {
-        threadPoolExecutor.execute(()->{
+        threadPoolExecutor.execute(() -> {
             if (1 == 1) {
                 log.error("123");
                 throw new RuntimeException("1243");
@@ -103,4 +109,13 @@ public class DaoTest {
         String token = loginService.login(20000L);
         System.out.println(token);
     }
+
+    @Autowired
+    private IUserBackpackService userBackpackService;
+
+    @Test
+    public void acquireItem() {
+        userBackpackService.acquireItem(20000L, ItemEnum.PLANET.getId(), IdempotentEnum.UID, 20000L + "");
+    }
+
 }

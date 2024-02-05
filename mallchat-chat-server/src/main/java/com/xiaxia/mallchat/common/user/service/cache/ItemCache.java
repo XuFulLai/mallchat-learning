@@ -28,4 +28,8 @@ public class ItemCache {
     @CacheEvict(cacheNames = "item", key = "'itemsByType:'+#itemType")
     public void evictByType(Integer itemType) {
     }
+
+    public ItemConfig getById(Long itemId) {
+        return itemConfigDao.getById(itemId);
+    }
 }
