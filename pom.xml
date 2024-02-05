@@ -11,8 +11,6 @@
     <description>chat-learining</description>
     <modules>
         <module>mallchat-chat-server</module>
-<!--        <module>mallchat-tools</module>-->
-        <module>mallchat-chat-server</module>
         <module>mallchat-framework</module>
     </modules>
 
